@@ -78,7 +78,7 @@ function! s:GetDirName(...) "{{{1
     call s:throw('Directory ' . dir . ' does not exist')
   endif
   if g:prosession_per_branch
-    let dir .= '_' . prosession#GetCurrBranch(dir)
+    let dir .= '_' . fnamemodify(prosession#GetCurrBranch(dir), ':p')
   endif
   return s:undofile(dir)
 endfunction

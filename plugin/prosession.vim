@@ -84,7 +84,7 @@ function! s:GetDirName(...) "{{{1
 endfunction
 
 function! s:GetSessionFileName(...) "{{{1
-  let fname = a:0 && a:1 =~# '\.vim$' ? a:1 : call('s:GetDirName', a:000)
+  let fname = a:0 && a:1 =~# '\.vim$' && !isdirectory(a:1) ? a:1 : call('s:GetDirName', a:000)
   let fname = s:StripTrailingSlash(fname)
   return fname =~# '\.vim$' ? fnamemodify(fname, ':t:r') : fnamemodify(fname, ':t')
 endfunction
@@ -251,7 +251,7 @@ function! s:AutoSwitch()
     if !empty(fresult)
           \ && has_key(fresult, 'args')
           \ && !empty(fresult['args'])
-          \ && fresult['args'][0] ==? 'checkout'
+          \ && (fresult['args'][0] ==? 'checkout' || fresult['args'][0] ==? 'switch')
           \ && len(fresult['args']) > 1
       call s:AutoStart()
     endif

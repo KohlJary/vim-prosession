@@ -6,6 +6,7 @@ endfunction
 function! prosession#GetCurrBranch(dir) "{{{1
   let branch = prosession#ExecInDir(a:dir, g:prosession_branch_cmd)
   if branch =~# "\n$" | let branch = branch[:-2] | endif
+  let branch = substitute(branch, '%', '/', 'g')
   return branch
 endfunction
 

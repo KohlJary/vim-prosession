@@ -1,5 +1,5 @@
 function! prosession#ExecInDir(dir, cmd) "{{{1
-  let pipe = has('win64') || has('win32') ? ' "&" ' : '; '
+  let pipe = has('win64') || has('win32') ? ' ; ' : '; '
   return system('cd ' . fnameescape(a:dir) . pipe . a:cmd)
 endfunction
 
